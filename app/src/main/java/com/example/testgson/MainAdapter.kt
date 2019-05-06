@@ -20,7 +20,7 @@ class MainAdapter(val homeFeed: HomeFeed): RecyclerView.Adapter<CustomViewHolder
 
     override fun onCreateViewHolder(p0: ViewGroup, viewType: Int): CustomViewHolder {
         // how do we even create a view
-        val layoutInflater = LayoutInflater.from(p0?.context)
+        val layoutInflater = LayoutInflater.from(p0.context)
         val cellForRow = layoutInflater.inflate(R.layout.video_row, p0, false)
         return CustomViewHolder(cellForRow)
     }
@@ -28,14 +28,15 @@ class MainAdapter(val homeFeed: HomeFeed): RecyclerView.Adapter<CustomViewHolder
     override fun onBindViewHolder(p0: CustomViewHolder, position: Int) {
 //        val videoTitle = videoTitles.get(position)
         val video = homeFeed.videos.get(position)
-        p0?.view?.textView_video_title?.text = video.name
+        p0.view.textView_video_title?.text = video.name
 
-        p0?.view?.textView_channel_name?.text = video.channel.name + "  •  " + "20K Views\n4 days ago"
+        p0.view.textView_channel_name?.text = video.channel.name + "  •  " + "20K Views\n4 days ago"
 
-        val thumbnailImageView = p0?.view?.imageView_video_thumbnail
+//load pic's over picasso to thumbnailImageView
+        val thumbnailImageView = p0.view.imageView_video_thumbnail
         Picasso.get().load(video.imageUrl).into(thumbnailImageView)
-
-        val channelProfileImageView = p0?.view?.imageView_channel_profile
+//load pic's over picasso to channelProfileImageView
+        val channelProfileImageView = p0.view.imageView_channel_profile
         Picasso.get().load(video.channel.profileImageUrl).into(channelProfileImageView)
     }
 
