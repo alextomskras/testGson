@@ -1,5 +1,6 @@
 package com.example.testgson
 
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -41,5 +42,14 @@ class MainAdapter(val homeFeed: HomeFeed): RecyclerView.Adapter<CustomViewHolder
 }
 
 class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+//start other activity by click)))
+    init {
+        view.setOnClickListener {
+            val intent = Intent(view.context, CourseDetailActivity::class.java)
+
+            view.context.startActivity(intent)
+        }
+    }
+
 
 }
