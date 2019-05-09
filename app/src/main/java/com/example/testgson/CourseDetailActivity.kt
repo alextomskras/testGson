@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +37,7 @@ class CourseDetailActivity : AppCompatActivity() {
     }
 
     private fun fetchJSON() {
-        println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+//        println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         val videoId = intent.getIntExtra(CustomViewHolder.VIDEO_ID_KEY, -1)
         val courseDetailUrl = "http://api.letsbuildthatapp.com/youtube/course_detail?id=" + videoId
 
