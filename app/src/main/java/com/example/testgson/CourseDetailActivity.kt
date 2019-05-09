@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.testgson.CustomViewHolder.Companion.VIDEO_TITLE_KEY
 import com.google.gson.GsonBuilder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,7 +28,8 @@ class CourseDetailActivity : AppCompatActivity() {
 //        recyclerView_main.adapter = CourseDetailAdapter()
 
         // we'll change the nav bar title..
-        val navBarTitle = intent.getStringExtra(CustomViewHolder.VIDEO_TITLE_KEY)
+        val navBarTitle = intent.getStringExtra(VIDEO_TITLE_KEY)
+//        val navBarTitle = intent.getStringExtra("log1")
         supportActionBar?.title = navBarTitle
 
 
@@ -37,9 +39,11 @@ class CourseDetailActivity : AppCompatActivity() {
     }
 
     private fun fetchJSON() {
-//        println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         val videoId = intent.getIntExtra(CustomViewHolder.VIDEO_ID_KEY, -1)
-        val courseDetailUrl = "http://api.letsbuildthatapp.com/youtube/course_detail?id=" + videoId
+//        val videoId = "3"
+        val courseDetailUrl = "https://api.letsbuildthatapp.com/youtube/course_detail?id=" + videoId
+        println(videoId)
 
 
         val client = OkHttpClient()
@@ -60,6 +64,7 @@ class CourseDetailActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call?, e: IOException?) {
+                println("Failed to execute request")
 
             }
         })
@@ -77,15 +82,11 @@ class CourseDetailActivity : AppCompatActivity() {
             val layoutInflater = LayoutInflater.from(p0.context)
             val customView = layoutInflater.inflate(R.layout.course_lesson_row, p0, false)
 
-
-//            val blueView = View(parent?.context)
-//            blueView.setBackgroundColor(Color.BLUE)
-//            blueView.minimumHeight = 50
             return CourseLessonViewHolder(customView)
         }
 
         override fun onBindViewHolder(p0: CourseLessonViewHolder, position: Int) {
-            val courseLesson = courseLessons.get(position)
+            val courseLesson = courseLessons[position]
 
             p0.customView.textView_course_lesson_title?.text = courseLesson.name
             p0.customView.textView_duration?.text = courseLesson.duration
@@ -113,6 +114,7 @@ class CourseDetailActivity : AppCompatActivity() {
                 val intent = Intent(customView.context, CourseLessonActivity::class.java)
 
                 intent.putExtra(COURSE_LESSON_LINK_KEY, courseLesson?.link)
+                Log.d("AMO3", "${courseLesson?.link}")
 
                 customView.context.startActivity(intent)
             }

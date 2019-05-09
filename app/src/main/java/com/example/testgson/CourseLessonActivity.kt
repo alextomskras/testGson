@@ -18,6 +18,7 @@ class CourseLessonActivity : AppCompatActivity() {
 //        webview_course_lesson.setBackgroundColor(Color.YELLOW)
 
         val courseLink = intent.getStringExtra(CourseDetailActivity.CourseLessonViewHolder.COURSE_LESSON_LINK_KEY)
+//        val courseLink = "https://google.com"
 
         webview_course_lesson.settings.javaScriptEnabled = true
         webview_course_lesson.settings.loadWithOverviewMode = true

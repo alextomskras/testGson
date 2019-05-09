@@ -1,7 +1,9 @@
 package com.example.testgson
 
 import android.content.Intent
+
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +30,7 @@ class MainAdapter(val homeFeed: HomeFeed): RecyclerView.Adapter<CustomViewHolder
     override fun onBindViewHolder(p0: CustomViewHolder, position: Int) {
 //        val videoTitle = videoTitles.get(position)
         val video = homeFeed.videos.get(position)
+        Log.d("VIDEOPOS", "$video")
         p0.view.textView_video_title?.text = video.name
 
         p0.view.textView_channel_name?.text = video.channel.name + "  •  " + "20K Views\n4 days ago"
@@ -38,6 +41,8 @@ class MainAdapter(val homeFeed: HomeFeed): RecyclerView.Adapter<CustomViewHolder
 //load pic's over picasso to channelProfileImageView
         val channelProfileImageView = p0.view.imageView_channel_profile
         Picasso.get().load(video.channel.profileImageUrl).into(channelProfileImageView)
+
+        p0.video = video
     }
 
 }
@@ -54,7 +59,10 @@ class CustomViewHolder(val view: View, var video: Video? = null) : RecyclerView.
             val intent = Intent(view.context, CourseDetailActivity::class.java)
 
             intent.putExtra(VIDEO_TITLE_KEY, video?.name)
+            Log.d("AMO", "${video?.name}")
+//            intent.putExtra("log1", "TEST2")
             intent.putExtra(VIDEO_ID_KEY, video?.id)
+            Log.d("AMO1", "${video?.id}")
 
             view.context.startActivity(intent)
         }
